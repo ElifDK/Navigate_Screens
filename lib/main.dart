@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: 'Navigation Example',
-    home: const FirstScreen(),
+    initialRoute: '/second',
+    routes: {
+      '/': (context) => FirstScreen(),
+      '/second': (context) => SecondScreen(),
+      '/third': (context) => ThirdScreen()
+    }
+    ,
   ));
 }
 
@@ -35,8 +41,9 @@ class FirstScreen extends StatelessWidget {
                 foregroundColor: Colors.white),
               onPressed: () {
                 // Navigate to Second Screen
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SecondScreen()));
+                //Navigator.push(context,
+                //   MaterialPageRoute(builder: (context) => SecondScreen()));
+                Navigator.pushNamed(context, '/second');
                 },
               child: const Text('Go to Second Screen'),
             ),
@@ -85,7 +92,8 @@ class SecondScreen extends StatelessWidget {
                   foregroundColor: Colors.white),
               onPressed: () {
                 // Navigate  to Third Screen
-                Navigator.push(context, MaterialPageRoute(builder:(context)=>ThirdScreen()));
+                //Navigator.push(context, MaterialPageRoute(builder:(context)=>ThirdScreen()));
+                Navigator.pushNamed(context, '/third');
               },
               child: const Text('Go to Third Screen'),
             ),
@@ -134,13 +142,9 @@ class ThirdScreen extends StatelessWidget {
                   foregroundColor: Colors.white),
               onPressed: () {
                 // Navigate back to First Screen and remove all previous routes
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FirstScreen(),
-                  ),
-                      (route) => false,
-                );
+                //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                //    builder: (context) => const FirstScreen()),(route) => false,);
+                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
               },
               child: const Text('Go to First Screen (Reset Stack)'),
             ),
