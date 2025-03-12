@@ -78,10 +78,77 @@ class SecondScreen extends StatelessWidget {
               },
               child: const Text('Go Back'),
             ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue, // background
+                  foregroundColor: Colors.white),
+              onPressed: () {
+                // Navigate  to Third Screen
+                Navigator.push(context, MaterialPageRoute(builder:(context)=>ThirdScreen()));
+              },
+              child: const Text('Go to Third Screen'),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+// Third Screen
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Third Screen'),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'This is the Third Screen!',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // background
+                  foregroundColor: Colors.white),
+              onPressed: () {
+                // Navigate back to Second Screen
+                Navigator.pop(context);
+              },
+              child: const Text('Go Back'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // background
+                  foregroundColor: Colors.white),
+              onPressed: () {
+                // Navigate back to First Screen and remove all previous routes
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FirstScreen(),
+                  ),
+                      (route) => false,
+                );
+              },
+              child: const Text('Go to First Screen (Reset Stack)'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
